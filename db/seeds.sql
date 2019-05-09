@@ -1,4 +1,4 @@
-USE burgers_db;
+USE burgers_sequelized;
 
 INSERT INTO burgers
   (name)
@@ -6,7 +6,7 @@ VALUES
   ("Big Mac"),
   ("Quarter Pounder"),
   ("The Whopper"),
-  ("Baconator")
+  ("Baconator"),
   ("Dave's Triple"),
   ("Jumbo Jack"),
   ("Classic Smash"),

@@ -1,17 +1,20 @@
 // import our burgers model
-const burgers = require("../models/burgers");
+var database = require("../models");
 
 // export our route definitions as a function
-module.exports = (app) => {
+module.exports = function (app) {
 
   app.get("/", function(req, res) {
 
     // use burger.findAll
-    burgers
+    database.burgers
       .findAll()
       // if we get to resolve()
       .then(dbBurgerData => {
-        res.render("index", {burgerData: dbBurgerData})
+        res.render("index", 
+        {
+          burgerData: dbBurgerData
+        })
       })
       // if we get to reject()
       .catch(err => {

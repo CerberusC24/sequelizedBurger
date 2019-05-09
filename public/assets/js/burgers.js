@@ -6,11 +6,13 @@ $(document).ready(function() {
     e.preventDefault();
 
     // package up form data for req.body purposes
-    const burgerData = {
+    const burgerData = 
+    {
       name: $("#name-input").val().trim()
     }
 
-    $.ajax({
+    $.ajax(
+    {
       url: "/api/burgers",
       method: "POST",
       data: burgerData // req.body
@@ -27,13 +29,15 @@ $(document).ready(function() {
   $(".update-burger").on("click", function() {
     // read back burger's id and devoured status
     const burgerId = $(this).attr("data-id");
-    const devoured = $(this).attr("data-devoured")
+    const burgerDevoured = $(this).attr("data-devoured")
+    console.log(burgerDevoured);
 
     $.ajax({
       url: `/api/burgers/${burgerId}`,
       method: "PUT",
-      data: {
-        devoured: devoured
+      data: 
+      {
+        devoured: burgerDevoured
       } // req.body
     })
     .then(() => location.reload())

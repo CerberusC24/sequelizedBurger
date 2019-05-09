@@ -1,5 +1,5 @@
 // import our burgers model
-var database = require("../models");
+const database = require("../models");
 
 module.exports = function (app) {
 
@@ -7,6 +7,7 @@ module.exports = function (app) {
   app.get("/api/burgers", function(req, res) {
     database.burgers.findAll({})
       .then(dbBurgerData => res.json(dbBurgerData))
+      console.log(dbBurgerData)
       .catch(err => {
         console.log(err);
         res.json(err);
@@ -42,10 +43,17 @@ module.exports = function (app) {
       });
   });
 
-  // PUT/update a burger's sleepy to true/false by id
+  // PUT/update a burger's devoured to true/false by id
   app.put("/api/burgers/:id", function(req, res) {
     // req.body => {sleepy: true} || {sleepy : false}
-    burgers.update(req.body.devoured, req.params.id)
+    database.burgers.update(
+      req.body.devoured, 
+      {
+        where: 
+        {
+          id: req.params.id
+        }
+      })
       .then(dbBurgerData => res.json(dbBurgerData))
       .catch(err => {
         console.log(err);
@@ -55,7 +63,13 @@ module.exports = function (app) {
 
   // DELETE a burger by its id
   app.delete("/api/burgers/:id", function(req, res) {
-    burgers.remove(req.params.id)
+    database.burgers.destroy(
+      {
+      where:
+        {
+          id: req.params.id
+        }
+      })
       .then(dbBurgerData => res.json(dbBurgerData))
       .catch(err => {
         console.log(err);
