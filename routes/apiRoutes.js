@@ -45,9 +45,9 @@ module.exports = function (app) {
 
   // PUT/update a burger's devoured to true/false by id
   app.put("/api/burgers/:id", function(req, res) {
-    // req.body => {sleepy: true} || {sleepy : false}
+    // req.body => {devoured: true} || {devoured : false}
     database.burgers.update(
-      req.body.devoured, 
+      req.body, 
       {
         where: 
         {
